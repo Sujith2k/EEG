@@ -1,0 +1,59 @@
+NavigationLayout:
+
+    MDNavigationDrawer:
+        drawer_logo: "heart.jpg"
+
+        NavigationDrawerIconButton:
+            text: "Take Reading"
+            on_release:
+                screen_manager.current = 'Take_Reading'
+
+        NavigationDrawerIconButton:
+            text: "Upload Data"
+            on_release:
+                screen_manager.current = 'Upload_Data'
+
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: screen_manager.current
+            md_bg_color: app.theme_cls.primary_color
+            left_action_items: [['menu' , lambda x: root.toggle_nav_drawer()]]
+
+        ScreenManager:
+            id: screen_manager
+
+            Screen:
+                name: 'Take_Reading'
+
+                MDLabel:
+                    id : status
+                    text: 'Status: IDLE'
+                    pos_hint: {'center_x' : 0.7 , 'center_y' : 0.5}
+                    size_hint_x: 0.5 
+
+                MDRaisedButton:
+                    text: 'Start Recording'
+                    md_bg_color: 0, 1, 0, 1
+                    pos_hint: {"center_x": .5, "center_y": .3}
+                    on_press: app.Start_recording()
+                    on_release: status.text = 'Status: RECORDING'
+
+                MDRaisedButton:
+                    text: 'Stop Recording'
+                    md_bg_color: 1, 0, 0, 1
+                    pos_hint: {"center_x": .5, "center_y": .2}
+                    on_press: app.Stop_recording()
+                    on_release: status.text = 'Status: IDLE'
+
+            Screen:
+                name: 'Upload_Data'
+                MDLabel:
+                    text: 'Upload Screen'
+                    pos_hint: {'center_x' : 0.7 , 'center_y' : 0.5}
+                    size_hint_x: 0.5 
+
+                MDRectangleFlatButton:
+                    text: 'Upload'
+                    md_bg_color: 1, 1, 1, 1
+                    pos_hint: {"center_x": .5, "center_y": .3}
