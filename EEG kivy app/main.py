@@ -17,12 +17,12 @@ def listen_to_socket():
     s.settimeout(2)     
     s.bind(('0.0.0.0', 8090 ))
     s.listen(0)
-    print('Listening Thread started')
+    print('[DEBUG] Listening Thread started')
     while True:
         time.sleep(0.01)
         try:
             while (record == True):
-                client, addr = s.accept()
+                client, _ = s.accept()
                 while True:
                     content = client.recv(32)
                 
@@ -38,7 +38,7 @@ def listen_to_socket():
         except Exception as e:
             print(e)
 
-    print('Leaving Thread')
+    print('[DEBUG] Leaving Thread')
 
 class MainApp(App):
     theme_cls = ThemeManager()
@@ -54,8 +54,6 @@ class MainApp(App):
         record = True
 
         
-
-    
     def Stop_recording(self):
         toast('Stopped Recording')
         print('[DEBUG] :Stop Recording Button Pressed')
